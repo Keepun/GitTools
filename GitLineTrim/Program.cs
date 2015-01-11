@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GitLineTrim
 {
-    class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
@@ -155,6 +155,7 @@ namespace GitLineTrim
         {
             BinaryReader bin = new BinaryReader(stream);
             bom = new byte[4];
+            bin.BaseStream.Seek(0, SeekOrigin.Begin);
             bin.BaseStream.Read(bom, 0, bom.Length);
             bin.BaseStream.Seek(0, SeekOrigin.Begin);
             if (bom[0] == 0x00 && bom[1] == 0x00 && bom[2] == 0xFE && bom[3] == 0xFF) {
