@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitUnicode", "GitUnicode\Gi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitEditor", "GitEditor\GitEditor.csproj", "{879E30FF-30BC-4403-B03A-7AE3C247C471}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitLauncher", "GitLauncher\GitLauncher.csproj", "{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GitTools.vsmdi
@@ -74,6 +76,18 @@ Global
 		{879E30FF-30BC-4403-B03A-7AE3C247C471}.Release|x64.Build.0 = Release|x64
 		{879E30FF-30BC-4403-B03A-7AE3C247C471}.Release|x86.ActiveCfg = Release|x86
 		{879E30FF-30BC-4403-B03A-7AE3C247C471}.Release|x86.Build.0 = Release|x86
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Debug|x64.ActiveCfg = Debug|x64
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Debug|x64.Build.0 = Debug|x64
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Debug|x86.ActiveCfg = Debug|x86
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Debug|x86.Build.0 = Debug|x86
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Release|x64.ActiveCfg = Release|x64
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Release|x64.Build.0 = Release|x64
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Release|x86.ActiveCfg = Release|x86
+		{E9E6A8D4-6890-4043-B432-27B8E27DD7DF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
