@@ -30,6 +30,24 @@ namespace GitUnicode
                                 fmem.WriteTo(bcon);
                             }
                         }
+                    } else if (args.Length > 0) {
+                        using (MemoryStream fmem = GetUTF8(File.OpenRead(args[0]))) {
+                            if (fmem == null) {
+                                using (Stream bcon = Console.OpenStandardOutput()) {
+                                    using (Stream bfile = File.OpenRead(args[0])) {
+                                        byte[] buffer = new byte[100000];
+                                        int count;
+                                        while ((count = bfile.Read(buffer, 0, buffer.Length)) > 0) {
+                                            bcon.Write(buffer, 0, count);
+                                        }
+                                    }
+                                }
+                                return;
+                            }
+                            using (Stream bcon = Console.OpenStandardOutput()) {
+                                fmem.WriteTo(bcon);
+                            }
+                        }
                     }
                 }
             }
