@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -32,14 +46,14 @@ namespace GitLauncher
                         RegistryKey git_gui = clsroot.CreateSubKey("git_gui");
                         git_gui.SetValue("", "Git &GUI Here", RegistryValueKind.String);
                         git_gui.CreateSubKey("command").SetValue("",
-                                                                 "\"" + launcher + "\" gui \"%1\"",
-                                                                 RegistryValueKind.String);
+                            "\"" + launcher + "\" gui \"%1\"",
+                            RegistryValueKind.String);
 
                         RegistryKey git_shell = clsroot.CreateSubKey("git_shell");
                         git_shell.SetValue("", "Git Ba&sh Here", RegistryValueKind.String);
                         git_shell.CreateSubKey("command").SetValue("",
-                                                                   "\"" + launcher + "\" shell \"%1\"",
-                                                                   RegistryValueKind.String);
+                            "\"" + launcher + "\" shell \"%1\"",
+                            RegistryValueKind.String);
 
                         string name = Path.GetFileNameWithoutExtension(launcher);
                         MessageBox.Show(name + " installed", name);
@@ -55,7 +69,7 @@ namespace GitLauncher
                 } else if (args[0] == "gui") {
                     psi.FileName = progfiles + "/Git/bin/wish.exe";
                     psi.Arguments = "\"" + progfiles + "/Git/libexec/git-core/git-gui\" --working-dir " +
-                                    "\"" + workdir + "\"";
+                        "\"" + workdir + "\"";
                 } else {
                     throw new Exception("Shell or GUI?");
                 }
