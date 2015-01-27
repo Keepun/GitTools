@@ -192,58 +192,58 @@ namespace GitFilters
                 fmem.SetLength(0);
             }
             StreamReader ffrom = new StreamReader(stream, cdpgfrom);
-                int seekbom = cdpgfrom.GetPreamble().Length;
-                if (codepagefrom != null) {
-                    Encoding testbom = GetEncodingStream(stream);
-                    if (testbom == null || testbom == Encoding.Default) {
-                        seekbom = 0;
-                    }
+            int seekbom = cdpgfrom.GetPreamble().Length;
+            if (codepagefrom != null) {
+                Encoding testbom = GetEncodingStream(stream);
+                if (testbom == null || testbom == Encoding.Default) {
+                    seekbom = 0;
                 }
-                string newLine = "\r\n";
-                string line;
-                if ((line = ffrom.ReadLine()) != null) {
-                    ffrom.DiscardBufferedData();
-                    ffrom.BaseStream.Seek(seekbom + cdpgfrom.GetByteCount(line), SeekOrigin.Begin);
-                    int ch = ffrom.Peek();
-                    if (ch != -1) {
-                        if (ch == '\n') {
-                            newLine = "\n";
+            }
+            string newLine = "\r\n";
+            string line;
+            if ((line = ffrom.ReadLine()) != null) {
+                ffrom.DiscardBufferedData();
+                ffrom.BaseStream.Seek(seekbom + cdpgfrom.GetByteCount(line), SeekOrigin.Begin);
+                int ch = ffrom.Peek();
+                if (ch != -1) {
+                    if (ch == '\n') {
+                        newLine = "\n";
+                        ffrom.Read();
+                    } else if (ch == '\r') {
+                        ffrom.Read();
+                        if ((ch = ffrom.Peek()) != -1 && ch == '\n') {
+                            newLine = "\r\n";
                             ffrom.Read();
-                        } else if (ch == '\r') {
-                            ffrom.Read();
-                            if ((ch = ffrom.Peek()) != -1 && ch == '\n') {
-                                newLine = "\r\n";
-                                ffrom.Read();
-                            } else {
-                                newLine = "\r";
-                            }
-                        }
-                    }
-                    do {
-                        if (linetrim) {
-                            line = line.TrimEnd();
-                        }
-                        if (addline == false && ffrom.EndOfStream) {
-                            int cnl = cdpgfrom.GetByteCount(newLine);
-                            if (ffrom.BaseStream.Length >= cnl) {
-                                ffrom.DiscardBufferedData();
-                                ffrom.BaseStream.Seek(-1*cnl, SeekOrigin.End);
-                                bool bnl = true;
-                                foreach (char chr in newLine) {
-                                    if (chr != ffrom.Read()) {
-                                        bnl = false;
-                                    }
-                                }
-                                if (bnl) {
-                                    line += newLine;
-                                }
-                            }
                         } else {
-                            line += newLine;
+                            newLine = "\r";
                         }
-                        fmemtxt.Write(line);
-                    } while ((line = ffrom.ReadLine()) != null);
+                    }
                 }
+                do {
+                    if (linetrim) {
+                        line = line.TrimEnd();
+                    }
+                    if (addline == false && ffrom.EndOfStream) {
+                        int cnl = cdpgfrom.GetByteCount(newLine);
+                        if (ffrom.BaseStream.Length >= cnl) {
+                            ffrom.DiscardBufferedData();
+                            ffrom.BaseStream.Seek(-1*cnl, SeekOrigin.End);
+                            bool bnl = true;
+                            foreach (char chr in newLine) {
+                                if (chr != ffrom.Read()) {
+                                    bnl = false;
+                                }
+                            }
+                            if (bnl) {
+                                line += newLine;
+                            }
+                        }
+                    } else {
+                        line += newLine;
+                    }
+                    fmemtxt.Write(line);
+                } while ((line = ffrom.ReadLine()) != null);
+            }
             fmemtxt.Flush();
             fmem.Seek(0, SeekOrigin.Begin);
             return fmem;
