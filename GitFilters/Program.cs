@@ -191,7 +191,7 @@ namespace GitFilters
                 fmemtxt.BaseStream.Seek(0, SeekOrigin.Begin);
                 fmem.SetLength(0);
             }
-            using (StreamReader ffrom = new StreamReader(stream, cdpgfrom)) {
+            StreamReader ffrom = new StreamReader(stream, cdpgfrom);
                 int seekbom = cdpgfrom.GetPreamble().Length;
                 if (codepagefrom != null) {
                     Encoding testbom = GetEncodingStream(stream);
@@ -244,7 +244,6 @@ namespace GitFilters
                         fmemtxt.Write(line);
                     } while ((line = ffrom.ReadLine()) != null);
                 }
-            }
             fmemtxt.Flush();
             fmem.Seek(0, SeekOrigin.Begin);
             return fmem;
