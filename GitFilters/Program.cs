@@ -54,6 +54,7 @@ namespace GitFilters
                 Console.WriteLine("Auto detection From only for Unicode with BOM.");
                 Console.WriteLine("If you do not set the From and not Unicode, then the conversion will not.");
                 Console.WriteLine("To=UTF-8 with BOM default.");
+                Console.WriteLine("To=None to disable the conversion.");
                 return;
             }
 
@@ -79,11 +80,13 @@ namespace GitFilters
                     return;
                 }
             }
-            Encoding cdpgto = null;
+            Encoding cdpgto = new UTF8Encoding(true);
             if (cmdargs["to"].set) {
                 try {
                     int cdpgnum;
-                    if (int.TryParse(cmdargs["to"].value, out cdpgnum)) {
+                    if (cmdargs["to"].value.ToLower() == "none") {
+                        cdpgto = null;
+                    } else if (int.TryParse(cmdargs["to"].value, out cdpgnum)) {
                         cdpgto = Encoding.GetEncoding(cdpgnum);
                     } else {
                         cdpgto = Encoding.GetEncoding(cmdargs["to"].value);
@@ -181,7 +184,7 @@ namespace GitFilters
                 return null;
             }
             MemoryStream fmem = new MemoryStream();
-            StreamWriter fmemtxt = new StreamWriter(fmem, codepageto ?? new UTF8Encoding(true));
+            StreamWriter fmemtxt = new StreamWriter(fmem, codepageto ?? cdpgfrom);
             if (nobom) {
                 fmemtxt.WriteLine();
                 fmemtxt.Flush();
