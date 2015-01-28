@@ -48,7 +48,7 @@ echo -e '*.ext\tfilter=utf16' >> .gitattributes
 ```
 #### GitLineTrim
 ```sh
-GitFilters.exe --linetrim [...]
+GitFilters.exe --to none --linetrim [...]
 ```
 #### GitUnicode
 ```sh
