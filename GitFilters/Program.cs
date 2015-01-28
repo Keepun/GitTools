@@ -107,9 +107,7 @@ namespace GitFilters
                     }
                     try {
                         if (finput.Length > 0) {
-                            long filesize;
-                            using (MemoryStream fmem = Filters(finput, out filesize,
-                                linetrim, addline, cdpgfrom, cdpgto, nobom)) {
+                            using (MemoryStream fmem = Filters(finput, linetrim, addline, cdpgfrom, cdpgto, nobom)) {
                                 if (fmem == null) {
                                     using (Stream bcon = Console.OpenStandardOutput()) {
                                         finput.WriteTo(bcon);
@@ -138,19 +136,19 @@ namespace GitFilters
             foreach (string file in files) {
                 Console.Write(file);
                 try {
-                    long filesize;
-                    using (MemoryStream fmem = Filters(File.OpenRead(file), out filesize,
-                        linetrim, addline, cdpgfrom, cdpgto, nobom)) {
+                    using (FileStream fstream = File.OpenRead(file))
+                    using (MemoryStream fmem = Filters(fstream, linetrim, addline, cdpgfrom, cdpgto, nobom)) {
                         if (fmem == null) {
                             Console.WriteLine(" - Binary");
                             continue;
                         }
-                        if (fmem.Length == filesize) {
+                        if (fmem.Length == fstream.Length) {
                             continue;
                         }
                         if (nobackup == false) {
                             File.Copy(file, file + ".bak", true);
                         }
+                        fstream.Close();
                         using (Stream fto = File.Open(file, FileMode.Truncate, FileAccess.Write, FileShare.Read)) {
                             fmem.WriteTo(fto);
                         }
@@ -175,10 +173,9 @@ namespace GitFilters
         /// <param name="codepageto"></param>
         /// <param name="nobom"> </param>
         /// <returns>null - binary</returns>
-        public static MemoryStream Filters(Stream stream, out long fileSize, bool linetrim, bool addline,
+        public static MemoryStream Filters(Stream stream, bool linetrim, bool addline,
             Encoding codepagefrom, Encoding codepageto = null, bool nobom = false)
         {
-            fileSize = stream.Length;
             Encoding cdpgfrom = codepagefrom ?? GetEncodingStream(stream);
             if (cdpgfrom == null) {
                 return null;
