@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GitUnicode</RootNamespace>
     <AssemblyName>GitUnicode</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -104,9 +105,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GitLineTrim\GitLineTrim.csproj">
-      <Project>{FDA87151-3BE6-4987-88B6-47D03CFCF1CE}</Project>
-      <Name>GitLineTrim</Name>
+    <ProjectReference Include="..\GitFilters\GitFilters.csproj">
+      <Project>{2B7DD0E9-7D67-42A4-9079-18B70503FE47}</Project>
+      <Name>GitFilters</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
