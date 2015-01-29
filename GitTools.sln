@@ -8,13 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitLineTrim", "GitLineTrim\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{08E94DF0-919F-4C93-BA4E-5A463D84642A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3F636871-E316-4EEC-9CF5-029FA9F77C86}"
-	ProjectSection(SolutionItems) = preProject
-		GitTools.vsmdi = GitTools.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitUnicode", "GitUnicode\GitUnicode.csproj", "{5DD773CA-3216-4354-9D6B-0D75019FC6AB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2B7DD0E9-7D67-42A4-9079-18B70503FE47} = {2B7DD0E9-7D67-42A4-9079-18B70503FE47}
@@ -27,9 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitFilters", "GitFilters\GitFilters.csproj", "{2B7DD0E9-7D67-42A4-9079-18B70503FE47}"
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = GitTools.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
