@@ -177,14 +177,18 @@ namespace GitFilters
         /// <param name="nobom"> </param>
         /// <returns>null - binary</returns>
         public static MemoryStream Filters(Stream stream, bool linetrim, bool addline,
-            Encoding codepagefrom, Encoding codepageto = null, bool nobom = false)
+            Encoding codepagefrom = null, Encoding codepageto = null, bool nobom = false)
         {
             Encoding cdpgfrom = codepagefrom ?? GetEncodingStream(stream);
             if (cdpgfrom == null) {
                 return null;
             }
+            Encoding cdpgto = codepageto ?? cdpgfrom;
+            if (codepagefrom == null && cdpgfrom == Encoding.Default) {
+                cdpgto = cdpgfrom;
+            }
             MemoryStream fmem = new MemoryStream();
-            StreamWriter fmemtxt = new StreamWriter(fmem, codepageto ?? cdpgfrom);
+            StreamWriter fmemtxt = new StreamWriter(fmem, cdpgto);
             if (nobom) {
                 fmemtxt.WriteLine();
                 fmemtxt.Flush();
